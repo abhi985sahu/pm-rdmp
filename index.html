@@ -93,8 +93,9 @@
 <script>
 "use strict";
 /* ================= DEFAULT PLAN (revised July 2026 for current India PM market) ================= */
+const PLAN_REV = 2;
 const DEFAULT_PLAN = {
-  meta: { title:"India PM Job Search", sprintWeeks:16, startDate:"2026-07-06" },
+  meta: { title:"India PM Job Search", sprintWeeks:16, startDate:"2026-07-06", rev:PLAN_REV },
   phases: [
   { id:1, label:"Phase 1", title:"Positioning & AI Readiness", timeline:"Weeks 1–2", color:"#E8643A", icon:"🎯",
     summary:"Resume is nearly done — now sharpen the AI-era positioning. In 2026, AI fluency is table stakes; interviewers discount pre-2024 work without recent AI proof.",
@@ -125,7 +126,14 @@ const DEFAULT_PLAN = {
           "Tier 1 — GCCs now owning global products: Microsoft, Google, Adobe, Intuit, Salesforce, Uber, Walmart Global Tech (India PMs own global charters — perfect fit for your US-scale moat)",
           "Tier 2 — AI-native & AI-heavy: Sarvam AI, Krutrim, Fractal, Atomicwork, Cred, Razorpay (GenAI infra), Glean India",
           "Tier 3 — Scaled product cos & B2B SaaS: PhonePe, Flipkart, Swiggy, Zomato/Blinkit, Meesho, Freshworks, Chargebee, Postman, BrowserStack, Darwinbox",
-          "Build tracker: Company | Role | Referral path | Status | Next action | Date" ]} ]},
+          "Build tracker: Company | Role | Referral path | Status | Next action | Date" ]},
+      { title:"⚡ Interview-Safe Baseline (before outreach ramps)",
+        why:"A warm intro can become a screening call within days. Be safe-to-interview BEFORE network activation — deep prep continues in parallel (Phase 3).",
+        tasks:[
+          "Rehearse the 2-min return pitch until smooth — record yourself once and fix what grates",
+          "Prep 3 core STAR stories (biggest impact, hardest conflict, a failure) — enough to survive any screening call",
+          "Do 1 timed product case + 1 AI PM case dry run to locate gaps early",
+          "Draft crisp answers: Why India? Why now? Comp expectations? Earliest start date?" ]} ]},
   { id:2, label:"Phase 2", title:"Network Activation", timeline:"Weeks 2–7", color:"#3A8FE8", icon:"🤝",
     summary:"With precision hiring, referrals matter more than in 2025. Most senior roles are filled before they're posted.",
     pillars:[
@@ -147,9 +155,10 @@ const DEFAULT_PLAN = {
         tasks:[
           "Brief 2–3 specialized recruiters (Xpheno, Antal, Longhouse, Native) with exact criteria",
           "Profiles live on: iimjobs, Instahyre, Cutshort, Wellfound, Naukri (senior settings)",
-          "Set alerts for 'AI Product Manager' + 'Senior PM' + 'Group PM' across platforms — AI PM postings grew 40% YoY" ]} ]},
-  { id:3, label:"Phase 3", title:"Interview Prep — AI-Weighted", timeline:"Weeks 3–9 (parallel)", color:"#7B3AE8", icon:"🧠",
-    summary:"2026 India PM loops now include AI-specific rounds: model evals, failure modes, agent design. Plan 4–8 weeks of structured prep.",
+          "Set alerts for 'AI Product Manager' + 'Senior PM' + 'Group PM' across platforms — AI PM postings grew 40% YoY",
+          "Balance channels weekly: LinkedIn for visibility+referrals, Naukri Resdex reach via a complete profile, iimjobs for MBA-pedigree senior roles, Instahyre/Cutshort for startups — India leans on referrals+recruiters more than LinkedIn alone" ]} ]},
+  { id:3, label:"Phase 3", title:"Interview Prep — AI-Weighted", timeline:"Weeks 1–9 (baseline W1, deepen in parallel)", color:"#7B3AE8", icon:"🧠",
+    summary:"Baseline readiness (Phase 1 ⚡ pillar) comes before outreach ramps; deep prep runs parallel to networking so you're never caught flat by a fast-moving referral. 2026 India loops include AI-specific rounds: model evals, failure modes, agent design.",
     pillars:[
       { title:"AI PM Round Mastery",
         why:"The eval/model-failure conversation is the highest-signal round in 2026 loops. Traditional PMs fail here.",
@@ -170,7 +179,14 @@ const DEFAULT_PLAN = {
           "Prep 8–10 STAR stories: influence without authority, conflict, data-driven pivots — include 2 AI-era stories",
           "Be ready to walk any feature's full funnel metrics from memory",
           "Prepare a product teardown + a take-home template (many Indian companies use take-homes)",
-          "Positive, forward-looking answer to 'Why leave a US role?'" ]} ]},
+          "Positive, forward-looking answer to 'Why leave a US role?'" ]},
+      { title:"🇺🇸 US Parallel Track — Sparring & Optionality",
+        why:"US/global interviews are high-quality practice reps, keep leverage, and US companies with India GCCs can convert a US loop into an India-based offer.",
+        tasks:[
+          "Apply to 2–3 US/remote AI PM roles per month purely as interview sparring — treat every loop as a rep, log every question",
+          "Prioritize US companies with India GCCs (Microsoft, Google, Adobe, Intuit, Uber, Walmart) and ask about India-based roles during the loop",
+          "Do 2 peer mock interviews (Exponent / IGotAnOffer pools) before your first real India loop",
+          "Keep the US resume current — an offer, even declined, is a negotiation anchor for India comp" ]} ]},
   { id:4, label:"Phase 4", title:"Applications & Conversion", timeline:"Weeks 5–14", color:"#3AE8A0", icon:"🚀",
     summary:"Run it like a product launch: referral-first pipeline, weekly review, never pause for one offer.",
     pillars:[
@@ -224,7 +240,9 @@ const DEFAULT_PLAN = {
     { tag:"📈 MARKET REALITY · JUL 2026", color:"#3A8FE8",
       text:"Demand for senior product leaders in India is up ~42% YoY, and AI PM demand outpaces supply 3x — but hiring is precision-mode: fewer, more senior, more specialized roles. GCCs have become product-owning orgs where India PMs run global charters. Non-AI mid-level roles are shrinking; AI-fluent roles are growing." },
     { tag:"⚠️ WATCH OUT FOR", color:"#7B3AE8",
-      text:"Interviewers discount pre-2024 work — bring recent AI shipping evidence. Returnees get lowballed — anchor to ₹50–90L Sr. PM Bengaluru bands plus AI premium. Notice periods are 2 months — plan timelines. Never pause the pipeline for one promising offer. Read ESOP cliffs and exercise windows before signing." }
+      text:"Interviewers discount pre-2024 work — bring recent AI shipping evidence. Returnees get lowballed — anchor to ₹50–90L Sr. PM Bengaluru bands plus AI premium. Notice periods are 2 months — plan timelines. Never pause the pipeline for one promising offer. Read ESOP cliffs and exercise windows before signing." },
+    { tag:"🔀 SEQUENCING & CHANNELS", color:"#E8643A",
+      text:"Prep before pipeline: be interview-safe (pitch + 3 STAR stories + 1 case) before outreach ramps — warm intros convert to screening calls within days. In India, LinkedIn is necessary but not sufficient: referrals and recruiters fill most senior roles, with Naukri (recruiter database searches), iimjobs (MBA-pedigree roles) and Instahyre/Cutshort (startups) running in parallel. And use US/global loops as free sparring — GCC employers can route a US loop into an India offer." }
   ]
 };
 const CATEGORY_COLORS = { "Network":"#3A8FE8","Applications":"#E8643A","Prep":"#7B3AE8","AI Craft":"#E83A6E","Process":"#3AE8A0","Brand":"#E8C43A" };
@@ -247,6 +265,28 @@ const GIST_FILENAME="pm-roadmap-data.json";
 let state=null, activeTab="today", activePhase=1, expanded={}, editMode=false, syncTimer=null, lastSyncMsg="";
 
 function freshState(){ return { version:2, updatedAt:new Date().toISOString(), plan:JSON.parse(JSON.stringify(DEFAULT_PLAN)), checked:{}, weekly:{}, weeklyHistory:{} }; }
+/* Migrations only APPEND pillars/tasks/insights (never reorder), so existing checked-task keys stay valid. */
+function migratePlan(){
+  const p=state.plan; if(!p.meta) return; p.meta.rev=p.meta.rev||1; let changed=false;
+  if(p.meta.rev<2){
+    const D=DEFAULT_PLAN;
+    const ph1=p.phases.find(x=>x.id===1), d1=D.phases.find(x=>x.id===1);
+    if(ph1 && d1 && !ph1.pillars.some(pl=>pl.title.indexOf("Interview-Safe")>=0))
+      ph1.pillars.push(JSON.parse(JSON.stringify(d1.pillars[d1.pillars.length-1])));
+    const ph2=p.phases.find(x=>x.id===2);
+    if(ph2){ const rec=ph2.pillars.find(pl=>pl.title.indexOf("Recruiter")>=0);
+      if(rec && !rec.tasks.some(t=>t.indexOf("Balance channels")>=0))
+        rec.tasks.push("Balance channels weekly: LinkedIn for visibility+referrals, Naukri Resdex reach via a complete profile, iimjobs for MBA-pedigree senior roles, Instahyre/Cutshort for startups — India leans on referrals+recruiters more than LinkedIn alone"); }
+    const ph3=p.phases.find(x=>x.id===3), d3=D.phases.find(x=>x.id===3);
+    if(ph3 && d3){ ph3.timeline=d3.timeline; ph3.summary=d3.summary;
+      if(!ph3.pillars.some(pl=>pl.title.indexOf("US Parallel")>=0))
+        ph3.pillars.push(JSON.parse(JSON.stringify(d3.pillars[d3.pillars.length-1]))); }
+    if(p.insights && !p.insights.some(i=>i.tag.indexOf("SEQUENCING")>=0))
+      p.insights.push(JSON.parse(JSON.stringify(DEFAULT_PLAN.insights[DEFAULT_PLAN.insights.length-1])));
+    p.meta.rev=2; changed=true;
+  }
+  if(changed) saveLocal();
+}
 function loadLocal(){ try{ const raw=localStorage.getItem(LS_KEY); if(raw){ const s=JSON.parse(raw); if(s && s.plan) return s; } }catch(e){} return freshState(); }
 function saveLocal(touch=true){ if(touch) state.updatedAt=new Date().toISOString(); localStorage.setItem(LS_KEY, JSON.stringify(state)); scheduleGistSave(); }
 
@@ -293,7 +333,7 @@ async function pullRemote(){
       if(file.truncated){ content=await (await fetch(file.raw_url)).text(); }
       const remote=JSON.parse(content);
       if(remote && remote.updatedAt && new Date(remote.updatedAt)>new Date(state.updatedAt)){
-        state=remote; localStorage.setItem(LS_KEY,JSON.stringify(state)); render();
+        state=remote; migratePlan(); localStorage.setItem(LS_KEY,JSON.stringify(state)); render();
       } else if(new Date(state.updatedAt)>new Date(remote.updatedAt||0)){ await pushRemote(); }
     }
     setSyncStatus("Synced · "+new Date().toLocaleTimeString(),"#3AE8A0");
@@ -543,6 +583,7 @@ function renderSettings(){
 /* ================= INIT ================= */
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{ activeTab=b.dataset.tab; render(); });
 state=loadLocal();
+migratePlan();
 setSyncStatus(token()? "Connecting…":"Local only — connect cloud sync in Settings","#888");
 render();
 if(token()) pullRemote();
