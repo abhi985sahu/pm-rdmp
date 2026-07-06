@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D0D0D">
+<title>India PM Master Plan · 2026</title>
+<style>
+  :root{
+    --bg:#0D0D0D; --bg2:#141414; --bg3:#1A1A1A; --border:#2A2A2A; --border2:#222;
+    --text:#F0EDE6; --muted:#888; --dim:#555; --body:#CCC;
+    --c1:#E8643A; --c2:#3A8FE8; --c3:#7B3AE8; --c4:#3AE8A0; --c5:#E8C43A; --c6:#E83A6E;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; min-height:100vh;}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;}
+  header{border-bottom:1px solid var(--border); padding:24px 20px 0; background:linear-gradient(180deg,#141414 0%,#0D0D0D 100%); position:sticky; top:0; z-index:50;}
+  .wrap{max-width:900px; margin:0 auto;}
+  .kicker{font-size:10px; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; font-family:ui-monospace,Menlo,monospace; margin-bottom:6px;}
+  h1{font-size:22px; font-weight:400; margin:0; letter-spacing:-.5px;}
+  .sub{color:var(--muted); font-size:13px; margin-top:4px;}
+  .tabs{display:flex; gap:2px; margin-top:16px; overflow-x:auto; scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{padding:10px 14px; font-size:12px; letter-spacing:.05em; border:none; border-bottom:2px solid transparent; background:transparent; color:var(--muted); cursor:pointer; font-family:ui-monospace,Menlo,monospace; white-space:nowrap;}
+  .tab.active{color:var(--text); border-bottom-color:var(--c1);}
+  main{max-width:900px; margin:0 auto; padding:20px 16px 90px;}
+  .card{border:1px solid var(--border2); border-radius:10px; padding:18px; margin-bottom:14px; background:var(--bg2);}
+  .btn{padding:9px 16px; font-size:12px; border:1px solid #333; background:transparent; color:var(--body); border-radius:6px; cursor:pointer; font-family:ui-monospace,Menlo,monospace; letter-spacing:.04em;}
+  .btn.primary{background:var(--text); color:var(--bg); border-color:var(--text);}
+  .btn.small{padding:5px 10px; font-size:11px;}
+  .btn.danger{color:var(--c6); border-color:#4a2530;}
+  input[type=text],input[type=password],input[type=date],textarea{width:100%; padding:10px 12px; background:var(--bg3); border:1px solid #333; border-radius:6px; color:var(--text); font-size:14px; font-family:inherit;}
+  textarea{resize:vertical; min-height:60px;}
+  .progressbar{background:var(--border2); border-radius:4px; height:5px; overflow:hidden;}
+  .progressbar > div{height:100%; border-radius:4px; transition:width .4s ease;}
+  .check{width:20px; height:20px; border-radius:4px; border:1.5px solid #444; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--bg); transition:all .15s; margin-top:1px;}
+  .task{display:flex; align-items:flex-start; gap:12px; padding:11px 0; border-bottom:1px solid var(--bg3); cursor:pointer;}
+  .task:last-child{border-bottom:none;}
+  .task span.txt{font-size:14px; color:var(--body); line-height:1.5; flex:1;}
+  .task.done span.txt{color:var(--dim); text-decoration:line-through;}
+  .pill{font-size:10px; letter-spacing:.1em; font-family:ui-monospace,Menlo,monospace; padding:2px 8px; border-radius:3px; border:1px solid; white-space:nowrap;}
+  .phase-btns{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;}
+  .phase-btn{padding:8px 13px; border:1px solid #333; background:transparent; border-radius:6px; cursor:pointer; font-size:12px; font-family:ui-monospace,Menlo,monospace; color:var(--muted); transition:all .2s;}
+  .pillar{border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:12px;}
+  .pillar-head{padding:14px 16px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .pillar-body{padding:0 16px 14px; background:#111;}
+  .why{font-size:12px; color:var(--muted); font-style:italic; margin:10px 0 12px; padding-top:10px; border-top:1px solid #1E1E1E;}
+  .statgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-bottom:14px;}
+  .stat{border:1px solid var(--border2); border-radius:8px; padding:14px; background:var(--bg2); text-align:center;}
+  .stat .num{font-size:26px; color:var(--text);}
+  .stat .lbl{font-size:10px; letter-spacing:.12em; color:var(--muted); font-family:ui-monospace,Menlo,monospace; text-transform:uppercase; margin-top:4px;}
+  .quote{border-left:2px solid var(--c5); padding:4px 0 4px 16px; font-style:italic; color:#AAA; font-size:14px; line-height:1.6;}
+  .syncdot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px;}
+  #syncstatus{font-size:11px; font-family:ui-monospace,Menlo,monospace; color:var(--muted); display:flex; align-items:center; padding:6px 0 10px;}
+  .editbar{display:flex; gap:8px; align-items:center; margin-bottom:14px; flex-wrap:wrap;}
+  .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--bg3); border:1px solid #333; color:var(--body); padding:10px 20px; border-radius:8px; font-size:13px; font-family:ui-monospace,Menlo,monospace; z-index:100; opacity:0; transition:opacity .3s; pointer-events:none;}
+  .toast.show{opacity:1;}
+  .insight{border-radius:8px; padding:18px; margin-bottom:12px; font-size:14px; color:#AAA; line-height:1.7;}
+  .insight .tag{font-size:11px; font-family:ui-monospace,Menlo,monospace; letter-spacing:.1em; margin-bottom:8px;}
+  h2{font-size:18px; font-weight:400; margin:0 0 6px;}
+  .hint{color:var(--muted); font-size:13px; font-style:italic; margin:0 0 16px;}
+  .editable-actions{display:flex; gap:6px; flex-shrink:0;}
+  @media(max-width:600px){
+    header{padding:16px 14px 0;}
+    h1{font-size:18px;}
+    main{padding:16px 12px 90px;}
+    .card{padding:14px;}
+    .stat .num{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">Master Plan · US → India · Rev. Jul 2026</div>
+    <h1>India PM Job Search — Command Center</h1>
+    <div class="sub" id="subline">Sr. PM / Group PM · 16-week sprint</div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="today">Today</button>
+      <button class="tab" data-tab="roadmap">Roadmap</button>
+      <button class="tab" data-tab="weekly">This Week</button>
+      <button class="tab" data-tab="market">Market Intel</button>
+      <button class="tab" data-tab="settings">Sync &amp; Settings</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <div id="syncstatus"></div>
+  <div id="view"></div>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ================= DEFAULT PLAN (revised July 2026 for current India PM market) ================= */
+const DEFAULT_PLAN = {
+  meta: { title:"India PM Job Search", sprintWeeks:16, startDate:"2026-07-06" },
+  phases: [
+  { id:1, label:"Phase 1", title:"Positioning & AI Readiness", timeline:"Weeks 1–2", color:"#E8643A", icon:"🎯",
+    summary:"Resume is nearly done — now sharpen the AI-era positioning. In 2026, AI fluency is table stakes; interviewers discount pre-2024 work without recent AI proof.",
+    pillars:[
+      { title:"Finalize Resume & LinkedIn for the AI Era",
+        why:"Screeners now scan for AI-native signals. US scale alone no longer clears the bar — pair it with AI proof.",
+        tasks:[
+          "Finish India resume: quantify every bullet (MAU, revenue, conversion) AND surface any AI/ML/LLM work prominently",
+          "Rewrite LinkedIn headline/About to signal 'Global-scale SaaS PM + AI products' — not just 'Senior PM'",
+          "Add 'Open to Bengaluru | Mumbai | Pune | Remote India' via LinkedIn open-to-work (recruiters only)",
+          "Get resume reviewed by 2 India-based PM leaders for local signal calibration" ]},
+      { title:"Build AI-Native Proof of Work",
+        why:"AI-native companies expect PMs hands-on with prompts, evals, and agent design. 'I oversaw a team that did this' falls flat in 2026 interviews.",
+        tasks:[
+          "Ship one small LLM-powered side project (agent, RAG tool, or workflow automation) — document decisions publicly",
+          "Write 2 AI product teardowns (e.g., Perplexity, a Sarvam/Krutrim product) and post on LinkedIn",
+          "Practice writing evals: build a small eval set for your side project, measure hallucination/quality tradeoffs",
+          "Create a 1-pager 'AI PM portfolio': prompts iterated, evals run, models compared, what you shipped" ]},
+      { title:"Craft Your Return Narrative",
+        why:"'Why are you returning?' is guaranteed. A crisp answer that ends on ambition (not lifestyle) sets the tone.",
+        tasks:[
+          "Write a 2-minute pitch: US SaaS scale + AI product work + India's product decade + why now",
+          "Prepare the salary-anchor answer — know that Sr. PM Bengaluru is ₹50–90L CTC, AI premium adds 30–50%",
+          "Anticipate the 'operating tempo' objection: have a story showing recent fast, AI-assisted shipping" ]},
+      { title:"Refresh Target List (3 tiers, 2026 reality)",
+        why:"Hiring is 'precision mode' — selective, referral-driven. Focus beats spray-and-pray more than ever.",
+        tasks:[
+          "Tier 1 — GCCs now owning global products: Microsoft, Google, Adobe, Intuit, Salesforce, Uber, Walmart Global Tech (India PMs own global charters — perfect fit for your US-scale moat)",
+          "Tier 2 — AI-native & AI-heavy: Sarvam AI, Krutrim, Fractal, Atomicwork, Cred, Razorpay (GenAI infra), Glean India",
+          "Tier 3 — Scaled product cos & B2B SaaS: PhonePe, Flipkart, Swiggy, Zomato/Blinkit, Meesho, Freshworks, Chargebee, Postman, BrowserStack, Darwinbox",
+          "Build tracker: Company | Role | Referral path | Status | Next action | Date" ]} ]},
+  { id:2, label:"Phase 2", title:"Network Activation", timeline:"Weeks 2–7", color:"#3A8FE8", icon:"🤝",
+    summary:"With precision hiring, referrals matter more than in 2025. Most senior roles are filled before they're posted.",
+    pillars:[
+      { title:"Map & Activate Your India Network",
+        why:"You have more India connections than you think — surface them systematically.",
+        tasks:[
+          "Export LinkedIn connections → filter India → tag by target company",
+          "List ex-colleagues (2007–2014 India stint), batchmates, alumni now at target companies",
+          "Identify 2nd-degree paths into every Tier 1/2 company; ask for intros with specific role links",
+          "Run 5 meaningful conversations/week — insight-seeking, not job-asking" ]},
+      { title:"Build Public AI-PM Visibility",
+        why:"LinkedIn content on AI product topics is the highest-leverage inbound channel for senior PM roles in 2026.",
+        tasks:[
+          "Post 1x/week: AI product teardowns, US-vs-India product observations, agentic UX patterns",
+          "Comment meaningfully on posts by India PM leaders daily (10 min/day)",
+          "Join communities: The Product Folks, GrowthX, Product Nation, Reforge India — be visibly active" ]},
+      { title:"Recruiter & Platform Engine",
+        why:"India's senior-role recruiter ecosystem is robust — brief them precisely.",
+        tasks:[
+          "Brief 2–3 specialized recruiters (Xpheno, Antal, Longhouse, Native) with exact criteria",
+          "Profiles live on: iimjobs, Instahyre, Cutshort, Wellfound, Naukri (senior settings)",
+          "Set alerts for 'AI Product Manager' + 'Senior PM' + 'Group PM' across platforms — AI PM postings grew 40% YoY" ]} ]},
+  { id:3, label:"Phase 3", title:"Interview Prep — AI-Weighted", timeline:"Weeks 3–9 (parallel)", color:"#7B3AE8", icon:"🧠",
+    summary:"2026 India PM loops now include AI-specific rounds: model evals, failure modes, agent design. Plan 4–8 weeks of structured prep.",
+    pillars:[
+      { title:"AI PM Round Mastery",
+        why:"The eval/model-failure conversation is the highest-signal round in 2026 loops. Traditional PMs fail here.",
+        tasks:[
+          "Drill: precision vs recall tradeoffs, when GenAI is the WRONG tool, explaining hallucination to a stakeholder",
+          "Practice designing an eval suite for an LLM feature (weekly, hands-on)",
+          "Study agentic product patterns: autonomy levels, human-in-loop design, cost/latency tradeoffs",
+          "Mock 2 AI PM interviews with practitioners (find via Product Folks / Exponent peers)" ]},
+      { title:"India-Context Product Cases",
+        why:"Senior rounds blend US-style product sense with local market case work.",
+        tasks:[
+          "2–3 India cases/week: UPI ecosystem, ONDC, Tier 2/3 users, vernacular AI, quick-commerce economics",
+          "Study each target company's competitive landscape before any call",
+          "Refresh frameworks (CIRCLES, HEART, North Star) but lead with judgment, not framework recitation" ]},
+      { title:"Leadership Stories & Execution Depth",
+        why:"Sr/Group PM rounds probe cross-functional leadership and metrics fluency hard.",
+        tasks:[
+          "Prep 8–10 STAR stories: influence without authority, conflict, data-driven pivots — include 2 AI-era stories",
+          "Be ready to walk any feature's full funnel metrics from memory",
+          "Prepare a product teardown + a take-home template (many Indian companies use take-homes)",
+          "Positive, forward-looking answer to 'Why leave a US role?'" ]} ]},
+  { id:4, label:"Phase 4", title:"Applications & Conversion", timeline:"Weeks 5–14", color:"#3AE8A0", icon:"🚀",
+    summary:"Run it like a product launch: referral-first pipeline, weekly review, never pause for one offer.",
+    pillars:[
+      { title:"Application Engine",
+        why:"Quality volume with referral paths beats cold applying 10x in a selective market.",
+        tasks:[
+          "5–8 quality applications/week, referral path first, cold apply only as backup",
+          "Tailor resume top-block per role (2–3 sentences, mirror the JD's AI language)",
+          "Weekly pipeline review: stage every opportunity, follow up anything >5 days stale" ]},
+      { title:"Interview Execution",
+        why:"Every interview is also a network node — even a 'no' can refer you.",
+        tasks:[
+          "Research every interviewer; find shared context",
+          "Debrief doc after each round: what landed, what to fix",
+          "Thank-you note with one specific insight within 24h" ]},
+      { title:"Offer & Negotiation (2026 bands)",
+        why:"Know the market: Sr. PM Bengaluru ₹50–90L CTC; AI-PM premium 30–50%; senior AI roles at unicorns/global cos ₹60L–1.5Cr incl. equity.",
+        tasks:[
+          "Deconstruct every CTC: fixed / variable / ESOP / benefits — compare fixed-to-fixed",
+          "Anchor high: returnees get lowballed; your US-scale + AI proof commands a premium",
+          "Negotiate joining bonus against unvested US equity",
+          "Clarify hybrid policy, ESOP cliff & exercise window, relocation support" ]} ]},
+  { id:5, label:"Phase 5", title:"Transition & Landing", timeline:"Weeks 12–16+", color:"#E8C43A", icon:"🏠",
+    summary:"Search and move run in parallel — remove life friction early.",
+    pillars:[
+      { title:"Relocation Logistics",
+        why:"Removing friction keeps your energy on the search.",
+        tasks:[
+          "Plan around India notice periods (2 months typical) in your start-date math",
+          "Housing: short-term first, long-term after city/office is confirmed",
+          "Reactivate Indian bank accounts, Aadhaar, PAN; plan health-insurance gap coverage" ]},
+      { title:"30-60-90 Plan",
+        why:"A ready plan closes offers and accelerates your start.",
+        tasks:[
+          "Draft generic Sr. PM 30-60-90 (listen → learn → lead) with an AI-adoption angle",
+          "Customize for each late-stage company's known challenges",
+          "Identify 2–3 quick wins you could drive in the first 90 days" ]} ]}
+  ],
+  weekly:[
+    { label:"5 LinkedIn outreach messages", category:"Network" },
+    { label:"2 informational coffee chats", category:"Network" },
+    { label:"5–8 quality job applications", category:"Applications" },
+    { label:"2–3 product cases (≥1 AI PM case)", category:"Prep" },
+    { label:"2h hands-on AI building (prompts/evals/agents)", category:"AI Craft" },
+    { label:"1 LinkedIn post + daily engagement", category:"Brand" },
+    { label:"Pipeline review & follow-ups", category:"Process" }
+  ],
+  insights:[
+    { tag:"💡 YOUR MOAT, UPDATED", color:"#3AE8A0",
+      text:"US SaaS scale is still rare in India — but in 2026 it must be paired with recent AI-native proof. The winning pitch: 'I've shipped at global scale AND I build with LLMs hands-on.' Either alone is no longer enough." },
+    { tag:"📈 MARKET REALITY · JUL 2026", color:"#3A8FE8",
+      text:"Demand for senior product leaders in India is up ~42% YoY, and AI PM demand outpaces supply 3x — but hiring is precision-mode: fewer, more senior, more specialized roles. GCCs have become product-owning orgs where India PMs run global charters. Non-AI mid-level roles are shrinking; AI-fluent roles are growing." },
+    { tag:"⚠️ WATCH OUT FOR", color:"#7B3AE8",
+      text:"Interviewers discount pre-2024 work — bring recent AI shipping evidence. Returnees get lowballed — anchor to ₹50–90L Sr. PM Bengaluru bands plus AI premium. Notice periods are 2 months — plan timelines. Never pause the pipeline for one promising offer. Read ESOP cliffs and exercise windows before signing." }
+  ]
+};
+const CATEGORY_COLORS = { "Network":"#3A8FE8","Applications":"#E8643A","Prep":"#7B3AE8","AI Craft":"#E83A6E","Process":"#3AE8A0","Brand":"#E8C43A" };
+const QUOTES = [
+  "Consistency beats intensity. Check off three things today.",
+  "Every conversation is a door. Open five this week.",
+  "You've shipped at global scale. Most candidates haven't. Lead with that.",
+  "The market rewards AI fluency — every hour of hands-on building compounds.",
+  "A 'no' today is a referral in six months. Keep every bridge warm.",
+  "Referrals fill roles before they're posted. Work the network, not the job boards.",
+  "Anchor high. You are not a discount hire — you're a premium import.",
+  "Done is better than perfect. Send the message.",
+  "Your pipeline is your product. Review it, prune it, grow it.",
+  "Six months from now you'll be glad you didn't skip this week."
+];
+
+/* ================= STATE ================= */
+const LS_KEY="pmRoadmap.v2.state", LS_TOKEN="pmRoadmap.token", LS_GIST="pmRoadmap.gistId";
+const GIST_FILENAME="pm-roadmap-data.json";
+let state=null, activeTab="today", activePhase=1, expanded={}, editMode=false, syncTimer=null, lastSyncMsg="";
+
+function freshState(){ return { version:2, updatedAt:new Date().toISOString(), plan:JSON.parse(JSON.stringify(DEFAULT_PLAN)), checked:{}, weekly:{}, weeklyHistory:{} }; }
+function loadLocal(){ try{ const raw=localStorage.getItem(LS_KEY); if(raw){ const s=JSON.parse(raw); if(s && s.plan) return s; } }catch(e){} return freshState(); }
+function saveLocal(touch=true){ if(touch) state.updatedAt=new Date().toISOString(); localStorage.setItem(LS_KEY, JSON.stringify(state)); scheduleGistSave(); }
+
+/* ================= DATE HELPERS ================= */
+function isoWeekKey(d=new Date()){ const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); const day=t.getUTCDay()||7; t.setUTCDate(t.getUTCDate()+4-day); const y=t.getUTCFullYear(); const start=new Date(Date.UTC(y,0,1)); const wk=Math.ceil((((t-start)/86400000)+1)/7); return y+"-W"+String(wk).padStart(2,"0"); }
+function sprintWeek(){ const start=new Date(state.plan.meta.startDate+"T00:00:00"); const diff=Math.floor((Date.now()-start.getTime())/(7*86400000))+1; return diff; }
+function daysIn(){ const start=new Date(state.plan.meta.startDate+"T00:00:00"); return Math.floor((Date.now()-start.getTime())/86400000)+1; }
+
+/* ================= PROGRESS ================= */
+function allTaskKeys(){ const keys=[]; state.plan.phases.forEach(p=>p.pillars.forEach((pl,pi)=>pl.tasks.forEach((t,ti)=>keys.push(p.id+"-"+pi+"-"+ti)))); return keys; }
+function phaseProgress(p){ let total=0,done=0; p.pillars.forEach((pl,pi)=>pl.tasks.forEach((t,ti)=>{ total++; if(state.checked[p.id+"-"+pi+"-"+ti]) done++; })); return {total,done,pct: total? Math.round(done/total*100):0}; }
+function overallProgress(){ const keys=allTaskKeys(); const done=keys.filter(k=>state.checked[k]).length; return {total:keys.length, done, pct: keys.length? Math.round(done/keys.length*100):0}; }
+function weekChecks(wk=isoWeekKey()){ return state.weekly[wk]||{}; }
+function weekDoneCount(wk=isoWeekKey()){ return Object.values(weekChecks(wk)).filter(Boolean).length; }
+function streak(){ // consecutive past weeks (incl. current if ≥4 done) with ≥4 weekly items done
+  let s=0; const now=new Date();
+  for(let i=0;i<52;i++){ const d=new Date(now.getTime()-i*7*86400000); const wk=isoWeekKey(d); const n=Object.values(state.weekly[wk]||{}).filter(Boolean).length;
+    if(n>=4) s++; else { if(i===0) continue; break; } }
+  return s;
+}
+
+/* ================= GIST SYNC ================= */
+function token(){ return localStorage.getItem(LS_TOKEN)||""; }
+function gistId(){ return localStorage.getItem(LS_GIST)||""; }
+function setSyncStatus(msg,color){ lastSyncMsg=msg; const el=document.getElementById("syncstatus"); el.innerHTML='<span class="syncdot" style="background:'+color+'"></span>'+msg; }
+async function gh(path,opts={}){ const r=await fetch("https://api.github.com"+path,{...opts,headers:{ "Authorization":"Bearer "+token(), "Accept":"application/vnd.github+json", ...(opts.headers||{}) }}); if(!r.ok) throw new Error("GitHub "+r.status); return r.json(); }
+async function findOrCreateGist(){
+  if(gistId()) return gistId();
+  const gists=await gh("/gists?per_page=100");
+  const found=gists.find(g=>g.files && g.files[GIST_FILENAME]);
+  if(found){ localStorage.setItem(LS_GIST,found.id); return found.id; }
+  const created=await gh("/gists",{method:"POST",body:JSON.stringify({description:"India PM Roadmap — progress data (private)",public:false,files:{[GIST_FILENAME]:{content:JSON.stringify(state)}}})});
+  localStorage.setItem(LS_GIST,created.id); return created.id;
+}
+async function pullRemote(){
+  if(!token()) return;
+  try{
+    setSyncStatus("Syncing…","#E8C43A");
+    const id=await findOrCreateGist();
+    const g=await gh("/gists/"+id);
+    const file=g.files[GIST_FILENAME];
+    if(file){
+      let content=file.content;
+      if(file.truncated){ content=await (await fetch(file.raw_url)).text(); }
+      const remote=JSON.parse(content);
+      if(remote && remote.updatedAt && new Date(remote.updatedAt)>new Date(state.updatedAt)){
+        state=remote; localStorage.setItem(LS_KEY,JSON.stringify(state)); render();
+      } else if(new Date(state.updatedAt)>new Date(remote.updatedAt||0)){ await pushRemote(); }
+    }
+    setSyncStatus("Synced · "+new Date().toLocaleTimeString(),"#3AE8A0");
+  }catch(e){ setSyncStatus("Sync error — check token in Settings","#E8643A"); }
+}
+async function pushRemote(){
+  if(!token()) return;
+  try{
+    setSyncStatus("Saving to cloud…","#E8C43A");
+    const id=await findOrCreateGist();
+    await gh("/gists/"+id,{method:"PATCH",body:JSON.stringify({files:{[GIST_FILENAME]:{content:JSON.stringify(state)}}})});
+    setSyncStatus("Synced · "+new Date().toLocaleTimeString(),"#3AE8A0");
+  }catch(e){ setSyncStatus("Sync error — check token in Settings","#E8643A"); }
+}
+function scheduleGistSave(){ if(!token()) return; clearTimeout(syncTimer); syncTimer=setTimeout(pushRemote,2500); }
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden" && token()){ clearTimeout(syncTimer); navigator.sendBeacon && pushRemote(); } if(document.visibilityState==="visible" && token()){ pullRemote(); } });
+
+/* ================= UI HELPERS ================= */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2200); }
+function h(html){ const d=document.createElement("div"); d.innerHTML=html; return d; }
+
+/* ================= RENDER ================= */
+function render(){
+  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===activeTab));
+  const wk=sprintWeek(); const sub=document.getElementById("subline");
+  sub.textContent = wk>=1 && wk<=state.plan.meta.sprintWeeks ? `Sr. PM / Group PM · Week ${wk} of ${state.plan.meta.sprintWeeks} · Day ${daysIn()}` : "Sr. PM / Group PM · 16-week sprint";
+  const v=document.getElementById("view"); v.innerHTML="";
+  if(activeTab==="today") v.appendChild(renderToday());
+  if(activeTab==="roadmap") v.appendChild(renderRoadmap());
+  if(activeTab==="weekly") v.appendChild(renderWeekly());
+  if(activeTab==="market") v.appendChild(renderMarket());
+  if(activeTab==="settings") v.appendChild(renderSettings());
+}
+
+/* ---- TODAY / DASHBOARD ---- */
+function nextActions(){
+  const acts=[];
+  for(const p of state.plan.phases){ for(let pi=0;pi<p.pillars.length;pi++){ const pl=p.pillars[pi];
+    for(let ti=0;ti<pl.tasks.length;ti++){ const k=p.id+"-"+pi+"-"+ti; if(!state.checked[k]) acts.push({phase:p,pillar:pl,task:pl.tasks[ti],key:k}); if(acts.length>=3) return acts; } } }
+  return acts;
+}
+function renderToday(){
+  const o=overallProgress(); const wdone=weekDoneCount(); const wtotal=state.plan.weekly.length; const st=streak();
+  const q=QUOTES[Math.floor(daysIn())%QUOTES.length];
+  const acts=nextActions();
+  const el=h(`
+    <div class="statgrid">
+      <div class="stat"><div class="num">${o.pct}%</div><div class="lbl">Plan complete</div></div>
+      <div class="stat"><div class="num">${wdone}/${wtotal}</div><div class="lbl">This week</div></div>
+      <div class="stat"><div class="num">${st>0? st+"🔥":"—"}</div><div class="lbl">Week streak</div></div>
+      <div class="stat"><div class="num">${Math.max(0,state.plan.meta.sprintWeeks-sprintWeek()+1)}</div><div class="lbl">Weeks left</div></div>
+    </div>
+    <div class="card"><div class="progressbar"><div style="width:${o.pct}%;background:linear-gradient(90deg,#E8643A,#E8C43A)"></div></div>
+      <div class="mono" style="font-size:11px;color:var(--muted);margin-top:8px">${o.done} of ${o.total} tasks checked off</div></div>
+    <div class="card"><div class="quote">"${esc(q)}"</div></div>
+    <div class="card"><div class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--c4);margin-bottom:10px">▶ NEXT BEST ACTIONS</div><div id="nextacts"></div></div>
+  `);
+  const na=el.querySelector("#nextacts");
+  if(acts.length===0){ na.innerHTML='<div style="color:var(--c4);font-size:15px">All plan tasks complete. Extraordinary. 🎉</div>'; }
+  acts.forEach(a=>{
+    const row=h(`<div class="task"><div class="check"></div><span class="txt">${esc(a.task)}<div class="mono" style="font-size:10px;color:${a.phase.color};margin-top:3px">${a.phase.icon} ${esc(a.phase.label)} · ${esc(a.pillar.title)}</div></span></div>`).firstElementChild;
+    row.onclick=()=>{ state.checked[a.key]=true; saveLocal(); render(); toast("Checked off. Momentum. ⚡"); };
+    na.appendChild(row);
+  });
+  return el;
+}
+
+/* ---- ROADMAP ---- */
+function renderRoadmap(){
+  const el=h(`<div>
+    <div class="editbar">
+      <button class="btn small" id="editToggle">${editMode? "✓ Done editing":"✎ Edit plan"}</button>
+      ${editMode? '<span class="mono" style="font-size:11px;color:var(--c5)">Tap ✎ to edit · ✕ to delete · + to add. Changes sync everywhere.</span>':""}
+    </div>
+    <div class="phase-btns" id="pbtns"></div>
+    <div id="pdetail"></div>
+  </div>`);
+  el.querySelector("#editToggle").onclick=()=>{ editMode=!editMode; render(); };
+  const btns=el.querySelector("#pbtns");
+  state.plan.phases.forEach(p=>{
+    const pr=phaseProgress(p);
+    const b=h(`<button class="phase-btn" style="${activePhase===p.id? `border-color:${p.color};color:${p.color};background:${p.color}18`:""}">${p.icon} ${esc(p.label)} <span style="opacity:.7">· ${pr.pct}%</span></button>`).firstElementChild;
+    b.onclick=()=>{ activePhase=p.id; render(); };
+    btns.appendChild(b);
+  });
+  const p=state.plan.phases.find(x=>x.id===activePhase)||state.plan.phases[0];
+  const pr=phaseProgress(p);
+  const det=el.querySelector("#pdetail");
+  const head=h(`<div class="card" style="border-color:${p.color}44;background:${p.color}08">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <span style="font-size:24px">${p.icon}</span>
+      <h2 style="color:${p.color}">${esc(p.label)}: ${esc(p.title)}</h2>
+      <span class="pill" style="color:var(--muted);border-color:#333">${esc(p.timeline)}</span>
+    </div>
+    <p class="hint">${esc(p.summary)}</p>
+    <div class="progressbar"><div style="width:${pr.pct}%;background:${p.color}"></div></div>
+    <div class="mono" style="font-size:11px;color:var(--muted);margin-top:6px">${pr.done}/${pr.total} done</div>
+    <div id="pillars" style="margin-top:18px"></div>
+    ${editMode? `<button class="btn small" id="addPillar">+ Add section</button>`:""}
+  </div>`);
+  const pillarsEl=head.querySelector("#pillars");
+  p.pillars.forEach((pl,pi)=>{
+    const key=p.id+"-"+pi; const open=!!expanded[key];
+    const pilEl=h(`<div class="pillar">
+      <div class="pillar-head" style="${open? "background:var(--bg3)":""}">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:15px;color:var(--text)">${esc(pl.title)}</div>
+          ${!open? `<div style="font-size:12px;color:var(--dim);margin-top:3px;font-style:italic">${esc(pl.why)}</div>`:""}
+        </div>
+        ${editMode? `<div class="editable-actions"><button class="btn small" data-act="editpillar">✎</button><button class="btn small danger" data-act="delpillar">✕</button></div>`:""}
+        <span class="mono" style="color:${p.color};font-size:18px">${open? "−":"+"}</span>
+      </div>
+      <div class="pillar-body" style="display:${open? "block":"none"}">
+        <div class="why">💡 ${esc(pl.why)}</div>
+        <div class="tasks"></div>
+        ${editMode? `<button class="btn small" data-act="addtask" style="margin-top:10px">+ Add task</button>`:""}
+      </div>
+    </div>`).firstElementChild;
+    pilEl.querySelector(".pillar-head").onclick=(e)=>{ if(e.target.closest("[data-act]")) return; expanded[key]=!open; render(); };
+    if(editMode){
+      const eb=pilEl.querySelector('[data-act=editpillar]'); if(eb) eb.onclick=(e)=>{ e.stopPropagation(); const t=prompt("Section title:",pl.title); if(t===null) return; const w=prompt("Why it matters:",pl.why); if(w===null) return; pl.title=t; pl.why=w; saveLocal(); render(); };
+      const db=pilEl.querySelector('[data-act=delpillar]'); if(db) db.onclick=(e)=>{ e.stopPropagation(); if(confirm("Delete this whole section and its tasks?")){ p.pillars.splice(pi,1); saveLocal(); render(); } };
+      const ab=pilEl.querySelector('[data-act=addtask]'); if(ab) ab.onclick=()=>{ const t=prompt("New task:"); if(t){ pl.tasks.push(t); saveLocal(); render(); } };
+    }
+    const tasksEl=pilEl.querySelector(".tasks");
+    pl.tasks.forEach((task,ti)=>{
+      const tk=p.id+"-"+pi+"-"+ti; const done=!!state.checked[tk];
+      const row=h(`<div class="task ${done? "done":""}">
+        <div class="check" style="${done? `background:${p.color};border-color:${p.color}`:""}">${done? "✓":""}</div>
+        <span class="txt">${esc(task)}</span>
+        ${editMode? `<div class="editable-actions"><button class="btn small" data-act="edit">✎</button><button class="btn small danger" data-act="del">✕</button></div>`:""}
+      </div>`).firstElementChild;
+      row.onclick=(e)=>{ if(e.target.closest("[data-act]")) return; state.checked[tk]=!done; saveLocal(); render(); if(!done) toast("Nice. Keep going. ⚡"); };
+      if(editMode){
+        row.querySelector('[data-act=edit]').onclick=(e)=>{ e.stopPropagation(); const nt=prompt("Edit task:",task); if(nt!==null && nt.trim()){ pl.tasks[ti]=nt.trim(); saveLocal(); render(); } };
+        row.querySelector('[data-act=del]').onclick=(e)=>{ e.stopPropagation(); if(confirm("Delete task?")){ pl.tasks.splice(ti,1); delete state.checked[tk]; saveLocal(); render(); } };
+      }
+      tasksEl.appendChild(row);
+    });
+    pillarsEl.appendChild(pilEl);
+  });
+  const ap=head.querySelector("#addPillar");
+  if(ap) ap.onclick=()=>{ const t=prompt("New section title:"); if(!t) return; const w=prompt("Why it matters:")||""; p.pillars.push({title:t,why:w,tasks:[]}); saveLocal(); render(); };
+  det.appendChild(head);
+  return el;
+}
+
+/* ---- WEEKLY ---- */
+function renderWeekly(){
+  const wk=isoWeekKey(); const checks=weekChecks(wk); const st=streak();
+  const el=h(`<div>
+    <h2>Weekly Rhythm</h2>
+    <p class="hint">Resets every Monday. Consistency beats intensity — 4+ items keeps your streak alive. Current streak: <strong style="color:var(--c5)">${st} week${st===1?"":"s"}</strong> · Week ${esc(wk)}</p>
+    <div id="wlist"></div>
+    ${editMode||true? `<div class="editbar" style="margin-top:14px"><button class="btn small" id="addWeekly">+ Add weekly habit</button></div>`:""}
+    <div id="insights"></div>
+  </div>`);
+  const list=el.querySelector("#wlist");
+  state.plan.weekly.forEach((item,i)=>{
+    const done=!!checks["w"+i]; const col=CATEGORY_COLORS[item.category]||"#888";
+    const row=h(`<div class="card" style="display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;${done? `border-color:${col}44;background:${col}0A`:""}">
+      <div class="check" style="width:22px;height:22px;${done? `background:${col};border-color:${col}`:""}">${done? "✓":""}</div>
+      <span style="flex:1;font-size:15px;color:${done? "var(--dim)":"var(--body)"};${done? "text-decoration:line-through":""}">${esc(item.label)}</span>
+      <span class="pill" style="color:${col};border-color:${col}44">${esc(item.category.toUpperCase())}</span>
+      <button class="btn small danger" data-act="delw" style="display:none">✕</button>
+    </div>`).firstElementChild;
+    row.onclick=(e)=>{ if(e.target.closest("[data-act]")) return;
+      if(!state.weekly[wk]) state.weekly[wk]={};
+      state.weekly[wk]["w"+i]=!done; saveLocal(); render();
+      const n=weekDoneCount(wk); if(!done){ toast(n>=state.plan.weekly.length? "Perfect week! 🏆" : n>=4? "Streak secured this week 🔥" : "Logged. ⚡"); } };
+    row.oncontextmenu=(e)=>{ e.preventDefault(); if(confirm("Remove this weekly habit?")){ state.plan.weekly.splice(i,1); saveLocal(); render(); } };
+    list.appendChild(row);
+  });
+  el.querySelector("#addWeekly").onclick=()=>{ const t=prompt("New weekly habit:"); if(!t) return; const c=prompt("Category (Network / Applications / Prep / AI Craft / Process / Brand):","Process")||"Process"; state.plan.weekly.push({label:t,category:c}); saveLocal(); render(); };
+  const ins=el.querySelector("#insights");
+  state.plan.insights.forEach(x=>{
+    ins.appendChild(h(`<div class="insight" style="border:1px solid ${x.color}33;background:${x.color}08">
+      <div class="tag" style="color:${x.color}">${esc(x.tag)}</div>${esc(x.text)}</div>`).firstElementChild);
+  });
+  return el;
+}
+
+/* ---- MARKET INTEL ---- */
+function renderMarket(){
+  const el=h(`<div>
+    <h2>Market Intel — July 2026</h2>
+    <p class="hint">The context behind this plan. Revisit before interviews and negotiations.</p>
+    <div class="insight" style="border:1px solid #3A8FE833;background:#3A8FE808"><div class="tag" style="color:#3A8FE8">📊 DEMAND</div>
+      Demand for senior product leaders in India is up ~42% YoY. AI PM demand outpaces supply 3x; AI/ML postings grew 40% YoY. But hiring is <strong style="color:var(--text)">precision-mode</strong>: selective, senior, referral-driven. Non-AI mid-level roles are shrinking.</div>
+    <div class="insight" style="border:1px solid #3AE8A033;background:#3AE8A008"><div class="tag" style="color:#3AE8A0">💰 COMPENSATION (BENGALURU)</div>
+      Sr. PM: ₹50–90L CTC (avg ~₹43–48L, top decile ₹90L+). AI/ML product experience commands a 30–50% premium. Senior AI PM at unicorns/global cos: ₹60L–1.5Cr incl. equity. Always compare fixed-to-fixed; negotiate joining bonus against unvested US equity.</div>
+    <div class="insight" style="border:1px solid #E8643A33;background:#E8643A08"><div class="tag" style="color:#E8643A">🏢 WHO'S HIRING</div>
+      GCCs (Microsoft, Google, Adobe, Intuit, Salesforce, Uber, Walmart) — India PMs now own global products. AI-native: Sarvam AI, Krutrim, Fractal, Atomicwork. Scaled cos: Razorpay (GenAI infra), PhonePe, Flipkart, Swiggy, Zomato/Blinkit, Cred, Meesho. B2B SaaS: Freshworks, Chargebee, Postman, BrowserStack, Darwinbox.</div>
+    <div class="insight" style="border:1px solid #7B3AE833;background:#7B3AE808"><div class="tag" style="color:#7B3AE8">🧠 THE 2026 INTERVIEW BAR</div>
+      Loops now include AI-specific rounds: designing eval suites, model failure modes, precision/recall tradeoffs, when GenAI is the wrong tool, agentic UX. Hands-on fluency with prompts, evals, and agents is expected — "my team did that" fails. Plan 4–8 weeks of structured AI prep; pre-2024 work alone gets discounted.</div>
+    <div class="insight" style="border:1px solid #E8C43A33;background:#E8C43A08"><div class="tag" style="color:#E8C43A">🧭 YOUR EDGE</div>
+      US SaaS scale + engineering depth + consulting polish is a rare stack in India. Pair it with fresh AI-native proof-of-work and you're in the top few percent of Sr. PM candidates. Lead every conversation with global scale AND hands-on AI.</div>
+    <p class="hint" style="margin-top:16px">Ask Claude to refresh this tab monthly — the market is moving fast.</p>
+  </div>`);
+  return el;
+}
+
+/* ---- SETTINGS ---- */
+function renderSettings(){
+  const t=token(); const connected=!!t;
+  const el=h(`<div>
+    <h2>Cloud Sync</h2>
+    <p class="hint">Progress and plan edits save to a <strong>private GitHub Gist</strong> — encrypted in transit, visible only to your GitHub account, and synced across this computer and your phone.</p>
+    <div class="card">
+      <div class="mono" style="font-size:11px;letter-spacing:.1em;color:${connected? "var(--c4)":"var(--muted)"};margin-bottom:10px">${connected? "● CONNECTED":"○ NOT CONNECTED"}</div>
+      <label class="mono" style="font-size:11px;color:var(--muted)">GitHub token (needs only "gist" scope)</label>
+      <input type="password" id="tok" placeholder="ghp_… or github_pat_…" value="${esc(t)}" style="margin:8px 0 12px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary" id="connect">${connected? "Update token":"Connect"}</button>
+        ${connected? '<button class="btn" id="syncnow">Sync now</button><button class="btn danger" id="disconnect">Disconnect</button>':""}
+      </div>
+      <p class="hint" style="margin-top:12px">How to get a token: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained or classic → select only the <strong>gist</strong> scope → copy &amp; paste here. Do the same once on your phone's Chrome.</p>
+    </div>
+    <h2 style="margin-top:26px">Sprint</h2>
+    <div class="card">
+      <label class="mono" style="font-size:11px;color:var(--muted)">Sprint start date (Monday)</label>
+      <input type="date" id="startdate" value="${esc(state.plan.meta.startDate)}" style="margin:8px 0 12px;max-width:220px">
+      <button class="btn" id="savedate">Save</button>
+    </div>
+    <h2 style="margin-top:26px">Backup & Data</h2>
+    <div class="card" style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="export">⬇ Export JSON backup</button>
+      <button class="btn" id="importBtn">⬆ Import JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display:none">
+      <button class="btn danger" id="resetplan">Reset plan to default (keeps nothing)</button>
+    </div>
+  </div>`);
+  el.querySelector("#connect").onclick=async()=>{ const v=el.querySelector("#tok").value.trim(); if(!v){ toast("Paste a token first"); return; }
+    localStorage.setItem(LS_TOKEN,v); localStorage.removeItem(LS_GIST);
+    try{ await pullRemote(); toast("Connected & synced ✓"); render(); }catch(e){ toast("Couldn't connect — check token"); } };
+  const sn=el.querySelector("#syncnow"); if(sn) sn.onclick=()=>pullRemote().then(()=>toast("Synced ✓"));
+  const dc=el.querySelector("#disconnect"); if(dc) dc.onclick=()=>{ localStorage.removeItem(LS_TOKEN); localStorage.removeItem(LS_GIST); toast("Disconnected (local data kept)"); render(); };
+  el.querySelector("#savedate").onclick=()=>{ const v=el.querySelector("#startdate").value; if(v){ state.plan.meta.startDate=v; saveLocal(); render(); toast("Sprint date saved"); } };
+  el.querySelector("#export").onclick=()=>{ const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="pm-roadmap-backup-"+new Date().toISOString().slice(0,10)+".json"; a.click(); };
+  el.querySelector("#importBtn").onclick=()=>el.querySelector("#importFile").click();
+  el.querySelector("#importFile").onchange=(e)=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ const s=JSON.parse(r.result); if(s.plan){ state=s; saveLocal(); render(); toast("Imported ✓"); } else toast("Invalid backup file"); }catch(err){ toast("Invalid JSON"); } }; r.readAsText(f); };
+  el.querySelector("#resetplan").onclick=()=>{ if(confirm("Reset EVERYTHING (plan, progress, streaks) to defaults?")){ state=freshState(); saveLocal(); render(); } };
+  return el;
+}
+
+/* ================= INIT ================= */
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{ activeTab=b.dataset.tab; render(); });
+state=loadLocal();
+setSyncStatus(token()? "Connecting…":"Local only — connect cloud sync in Settings","#888");
+render();
+if(token()) pullRemote();
+</script>
+</body>
+</html>
